@@ -12,5 +12,7 @@ namespace AuthService.Domain.Entities
 
     public virtual UserInfoEntity UserInfo { get; set; }
     public virtual ICollection<UserLevelUserEntity> UserLevelUsers { get; set; }
+    public virtual ICollection<NotificationEntity> Notifications { get; set; }
+    public virtual ICollection<RolUserEntity> RolUsers { get; set; }
   }
 }

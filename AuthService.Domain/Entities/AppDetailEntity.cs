@@ -12,7 +12,7 @@ namespace AuthService.Domain.Entities
 
   public enum AppDetailInfoEnum
   {
-
+    
   }
 
   public enum AppDetailDevEnum
