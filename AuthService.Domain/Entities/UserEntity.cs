@@ -15,5 +15,6 @@ namespace AuthService.Domain.Entities
     public virtual ICollection<NotificationEntity> Notifications { get; set; }
     public virtual ICollection<RolUserEntity> RolUsers { get; set; }
     public virtual ICollection<LogLoginEntity> LogLogins { get; set; }
+    public virtual ICollection<TokenEntity> Tokens { get; set; }
   }
 }

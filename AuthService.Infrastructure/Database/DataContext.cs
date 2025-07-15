@@ -1,7 +1,7 @@
 using AuthService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace AuthService.Database
+namespace AuthService.Infrastructure.Database
 {
   public class DataContext : DbContext
   {
