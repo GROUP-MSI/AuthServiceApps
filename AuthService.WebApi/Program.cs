@@ -9,15 +9,15 @@ builder.Services.AddSwaggerGen();
 
 // Controllers
 builder.Services.AddControllers();
+builder.Services.AddApplication();
 
 // Cors
 string MyAllowSpecificOrigins = "AllowAnyOrigin";
-// builder.Services.ConfigureCors(MyAllowSpecificOrigins);
+builder.Services.ConfigureCors(MyAllowSpecificOrigins);
 
 // Inyeccion de dependencias
 // builder.Services.LoadRepositories();
 // builder.Services.LoadServices();
-// builder.Services.LoadUseCases();
 
 
 builder.Services.ConfigureContext(builder.Configuration.GetConnectionString("DbAsaAuth") ?? "");

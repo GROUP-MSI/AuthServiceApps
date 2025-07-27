@@ -1,3 +1,5 @@
+using AuthService.Application.Commands;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.WebApi.Controllers
@@ -5,9 +7,11 @@ namespace AuthService.WebApi.Controllers
   public class AuthController : ControllerBase
   {
     private readonly ILogger<AuthController> _logger;
-    public AuthController(ILogger<AuthController> logger)
+    private readonly ISender _sender;
+    public AuthController(ILogger<AuthController> logger, ISender sender)
     {
       _logger = logger;
+      _sender = sender;
     }
 
     [HttpPost("login")]
@@ -25,11 +29,17 @@ namespace AuthService.WebApi.Controllers
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> AuthRegister()
+    public async Task<IActionResult> AuthRegister([FromBody] CreateUserCommand request)
     {
       try
       {
-        return Ok("");
+        var userId = await _sender.Send(request);
+        return CreatedAtAction(
+          actionName: nameof(UserController.GetUser),
+          controllerName: "user",
+          routeValues: new { id = userId },
+          value: userId
+        );
       }
       catch (Exception err)
       {
@@ -79,7 +89,7 @@ namespace AuthService.WebApi.Controllers
         return BadRequest(err.Message);
       }
     }
-    
+
     [HttpPost("2fa/verify")]
     public async Task<IActionResult> TwoFactorOfAuthVerify()
     {
@@ -90,7 +100,7 @@ namespace AuthService.WebApi.Controllers
       catch (Exception err)
       {
         _logger.LogError(err.Message);
-        return BadRequest(err.Message);       
+        return BadRequest(err.Message);
       }
     }
   }
