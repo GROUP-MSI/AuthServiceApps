@@ -11,7 +11,6 @@ namespace AuthService.WebApi.Controllers
       _logger = logger;
     }
 
-
     [HttpPost]
     public async Task<IActionResult> CreatePermission()
     {

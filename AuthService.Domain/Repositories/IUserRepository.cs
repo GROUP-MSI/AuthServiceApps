@@ -9,7 +9,5 @@ namespace AuthService.Domain.Repositories
     Task<UserEntity> CreateUser(UserEntity create, Guid salt);
     Task<UserEntity> GetUserByName(string name);
     Task<UserEntity> GetUserByEmail(string email);
-    Task<bool> UserIsSeller(int userId);
-    Task<bool> UserIsCustomer(int userId);
   }
 }

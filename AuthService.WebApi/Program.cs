@@ -20,7 +20,6 @@ string MyAllowSpecificOrigins = "AllowAnyOrigin";
 // builder.Services.LoadUseCases();
 
 
-// Habilitando el contexto de la base de datos
 builder.Services.ConfigureContext(builder.Configuration.GetConnectionString("DbAsaAuth") ?? "");
 
 // Jasper Reports Config
@@ -48,8 +47,8 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.UseCors(MyAllowSpecificOrigins);
 
-// app.UseAuthentication();
-// app.UseAuthorization();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
