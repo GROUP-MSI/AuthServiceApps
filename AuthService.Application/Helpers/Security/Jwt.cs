@@ -22,8 +22,6 @@ namespace AuthService.Application.Helpers
 
         new Claim("id", user.Id.ToString()),
         new Claim("name", user.Name),
-        new Claim("customer", isCustomer.ToString()),
-        new Claim("seller", isSeller.ToString()),
       };
 
       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));

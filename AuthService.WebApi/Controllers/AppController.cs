@@ -12,74 +12,74 @@ namespace AuthService.WebApi.Controllers
     }
 
 
-    [HttpPost]
-    public async Task<IActionResult> CreateApp()
-    {
-      try
-      {
-        return Ok("");
-      }
-      catch (Exception err)
-      {
-        _logger.LogError(err.Message);
-        return BadRequest(err.Message);
-      }
-    }
+    // [HttpPost]
+    // public async Task<IActionResult> CreateApp()
+    // {
+    //   try
+    //   {
+    //     return Ok("");
+    //   }
+    //   catch (Exception err)
+    //   {
+    //     _logger.LogError(err.Message);
+    //     return BadRequest(err.Message);
+    //   }
+    // }
 
-    [HttpPatch]
-    public async Task<IActionResult> UpdateApp()
-    {
-      try
-      {
-        return Ok("");
-      }
-      catch (Exception err)
-      {
-        _logger.LogError(err.Message);
-        return BadRequest(err.Message);
-      }
-    }
+    // [HttpPatch]
+    // public async Task<IActionResult> UpdateApp()
+    // {
+    //   try
+    //   {
+    //     return Ok("");
+    //   }
+    //   catch (Exception err)
+    //   {
+    //     _logger.LogError(err.Message);
+    //     return BadRequest(err.Message);
+    //   }
+    // }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteApp()
-    {
-      try
-      {
-        return Ok("");
-      }
-      catch (Exception err)
-      {
-        _logger.LogError(err.Message);
-        return BadRequest(err.Message);
-      }
-    }
+    // [HttpDelete]
+    // public async Task<IActionResult> DeleteApp()
+    // {
+    //   try
+    //   {
+    //     return Ok("");
+    //   }
+    //   catch (Exception err)
+    //   {
+    //     _logger.LogError(err.Message);
+    //     return BadRequest(err.Message);
+    //   }
+    // }
 
-    [HttpGet]
-    public async Task<IActionResult> GetApps()
-    {
-      try
-      {
-        return Ok("");
-      }
-      catch (Exception err)
-      {
-        _logger.LogError(err.Message);
-        return BadRequest(err.Message);
-      }
-    }
+    // [HttpGet]
+    // public async Task<IActionResult> GetApps()
+    // {
+    //   try
+    //   {
+    //     return Ok("");
+    //   }
+    //   catch (Exception err)
+    //   {
+    //     _logger.LogError(err.Message);
+    //     return BadRequest(err.Message);
+    //   }
+    // }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetApp(int id)
-    {
-      try
-      {
-        return Ok("");
-      }
-      catch (Exception err)
-      {
-        _logger.LogError(err.Message);
-        return BadRequest(err.Message);
-      }
-    }
+    // [HttpGet("{id}")]
+    // public async Task<IActionResult> GetApp(int id)
+    // {
+    //   try
+    //   {
+    //     return Ok("");
+    //   }
+    //   catch (Exception err)
+    //   {
+    //     _logger.LogError(err.Message);
+    //     return BadRequest(err.Message);
+    //   }
+    // }
   }
 }

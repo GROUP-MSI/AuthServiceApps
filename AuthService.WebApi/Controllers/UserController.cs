@@ -13,8 +13,8 @@ namespace AuthService.WebApi.Controllers
       _sender = sender;
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetUser(Guid id)
+    [HttpGet("{id}")]
+    public IActionResult GetUser(int id)
     {
       // var query = new GetUserByIdQuery(id);
       // var user = await _sender.Send(query);

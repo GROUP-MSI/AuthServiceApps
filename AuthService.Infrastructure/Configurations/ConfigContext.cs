@@ -1,4 +1,4 @@
-using AuthService.Database;
+using AuthService.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
