@@ -1,9 +1,11 @@
+using AuthService.Application.Commands;
 using AuthService.Application.DTOs;
 using AuthService.Application.Helpers;
 using AuthService.Application.Services.Interfaces;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Repositories;
 using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.Options;
 
 namespace AuthService.Application.Services
@@ -14,12 +16,19 @@ namespace AuthService.Application.Services
     private readonly ITokenRepository _repo;
     private readonly IUserRepository _userRepo;
     private readonly IOptions<JwtSettings> _jwtConfig;
-    private readonly IBaseRepository _trepo;
-    public AuthService(IMapper mapper, IOptions<JwtSettings> jwtConfig, IBaseRepository trepo)
+    private readonly IMediator _mediator;
+    public AuthService(
+      IMapper mapper,
+      IOptions<JwtSettings> jwtConfig,
+      IMediator mediator,
+      ITokenRepository repo,
+      IUserRepository userRepo)
     {
       _mapper = mapper;
       _jwtConfig = jwtConfig;
-      _trepo = trepo;
+      _mediator = mediator;
+      _repo = repo;
+      _userRepo = userRepo;
     }
 
     public async Task<AuthResponseDto> Authentication(UserEntity user)
@@ -46,18 +55,12 @@ namespace AuthService.Application.Services
       var user = await _userRepo.GetUserAuthById(idUser);
       return await Authentication(user);
     }
-    
-    public async Task<AuthResponseDto> RegisterUser(AuthRegisterDto register)
+
+    public async Task<AuthResponseDto> RegisterUser(RegisterUserRequestDto register)
     {
-      Guid salt = Guid.NewGuid();
-      register.Password = PasswordHashSecurity.HashPassword(register.Password, salt);
-      var userCreate = _mapper.Map<UserEntity>(register);
+      var command = _mapper.Map<CreateUserCommand>(register);
 
-      var userInfoCreate = _mapper.Map<UserInfoEntity>(register);
-      var user = await _userRepo.CreateUser(userCreate, salt);
-
-      userInfoCreate.Id = user.Id;
-      await _trepo.Create(userInfoCreate);
+      var user = await _mediator.Send(command);
 
       return await Authentication(user);
     }

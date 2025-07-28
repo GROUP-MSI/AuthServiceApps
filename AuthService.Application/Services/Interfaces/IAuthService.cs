@@ -6,7 +6,7 @@ namespace AuthService.Application.Services.Interfaces
   {
     Task<AuthResponseDto> Login(AuthRequestDto request);
     Task<AuthResponseDto> RefreshToken(int idUser);
-    Task<AuthResponseDto> RegisterUser(AuthRegisterDto register);
+    Task<AuthResponseDto> RegisterUser(RegisterUserRequestDto register);
     Task<bool> ValidateRefreshToken(AuthRefreshTokenRequestDto auth, int idUser);
   }
 }

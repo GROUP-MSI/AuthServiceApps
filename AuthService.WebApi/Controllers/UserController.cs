@@ -20,7 +20,7 @@ namespace AuthService.WebApi.Controllers
     {
       // var query = new GetUserByIdQuery(id);
       // var user = await _sender.Send(query);
-      return Ok("user");
+      return Ok("USUARIO CREADO!");
     }
 
   }

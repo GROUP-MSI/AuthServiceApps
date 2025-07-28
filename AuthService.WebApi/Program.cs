@@ -1,4 +1,5 @@
 using AuthService.Application;
+using AuthService.Application.Helpers;
 using AuthService.Infrastructure.Configurations;
 using AuthService.WebApi.Configurations;
 
@@ -22,6 +23,7 @@ builder.Services.LoadServicesApplication();
 
 // Context
 builder.Services.ConfigureContext(builder.Configuration.GetConnectionString("DbAsaAuth") ?? "");
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
 // Endpoints
 builder.Services.AddEndpointsApiExplorer();

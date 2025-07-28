@@ -1,3 +1,4 @@
+using AuthService.Domain.Entities;
 using MediatR;
 
 namespace AuthService.Application.Commands
@@ -12,5 +13,5 @@ namespace AuthService.Application.Commands
     string MomLastName,
     DateTime BirthDay,
     string Ci
-    ) : IRequest<Guid>;
+    ) : IRequest<UserEntity>;
 }

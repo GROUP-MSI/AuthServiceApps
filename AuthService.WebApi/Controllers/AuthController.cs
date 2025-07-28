@@ -1,6 +1,5 @@
 using AuthService.Application.DTOs;
 using AuthService.Application.Services.Interfaces;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.WebApi.Controllers
@@ -11,13 +10,12 @@ namespace AuthService.WebApi.Controllers
   {
     private readonly ILogger<AuthController> _logger;
     private readonly IUserService _userServ;
-    private readonly ISender _sender;
-    // private readonly IMappper
-    public AuthController(ILogger<AuthController> logger, ISender sender, IUserService userServ)
+    private readonly IAuthService _service;
+    public AuthController(ILogger<AuthController> logger, IUserService userServ, IAuthService service)
     {
       _logger = logger;
-      _sender = sender;
       _userServ = userServ;
+      _service = service;
     }
 
     // [HttpPost("login")]
@@ -39,8 +37,7 @@ namespace AuthService.WebApi.Controllers
     {
       try
       {
-        var command = _userServ.MapToCommand(request);
-        var userId = await _sender.Send(command);
+        var userId = await _service.RegisterUser(request);
 
         return CreatedAtAction(
           actionName: nameof(UserController.GetUser),
@@ -52,6 +49,7 @@ namespace AuthService.WebApi.Controllers
       catch (Exception err)
       {
         _logger.LogError(err.Message);
+        Console.WriteLine(err.StackTrace);
         return BadRequest(err.Message);
       }
     }
