@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.WebApi.Controllers
 {
+  [Route("api/v1/app")]
+  [ApiController]
   public class AppController : ControllerBase
   {
 

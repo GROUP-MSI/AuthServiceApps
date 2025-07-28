@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.WebApi.Controllers
 {
+  [Route("api/v1/permission")]
+  [ApiController]
   public class PermissionController : ControllerBase
   {
 

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.WebApi.Controllers
 {
+  [Route("api/v1/user")]
+  [ApiController]
   public class UserController : ControllerBase
   {
     private readonly ILogger<AuthController> _logger;
