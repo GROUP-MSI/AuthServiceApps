@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace AuthService.Application.Commands
 {
-  public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserEntity>
+  public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
   {
     private readonly IUserRepository _userRepo;
     private readonly IBaseRepository _trepo;
@@ -23,7 +23,7 @@ namespace AuthService.Application.Commands
       _mapper = mapper;
     }
 
-    public async Task<UserEntity> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
       Guid salt = Guid.NewGuid();
       var userCreate = _mapper.Map<UserEntity>(request);
@@ -31,11 +31,11 @@ namespace AuthService.Application.Commands
       userCreate.AppId = 4;
 
       var userInfoCreate = _mapper.Map<UserInfoEntity>(request);
-      var user = await _userRepo.CreateUser(userCreate, salt);
+      await _userRepo.CreateUser(userCreate, salt);
 
-      userInfoCreate.Id = user.Id;
+      userInfoCreate.Id = userCreate.Id;
       await _trepo.Create(userInfoCreate);
-      return user;
+      return userCreate.Id;
     }
   }
 }

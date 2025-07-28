@@ -14,16 +14,15 @@ namespace AuthService.Infrastructure.Repositories
       _context = context;
     }
 
-    public async Task<TokenEntity> CreateToken(TokenEntity token, int userId, int timeValidMin)
+    public async Task CreateToken(TokenEntity token, int userId, int timeValidMin)
     {
       token.UserId = userId;
       token.CurrentTime = DateTime.UtcNow;
       token.ExpirateDate = DateTime.UtcNow.AddMinutes(timeValidMin);
+      token.User = null; 
 
       await _context.Tokens.AddAsync(token);
       await _context.SaveChangesAsync();
-
-      return token;
     }
 
     public async Task<TokenEntity> GetTokenRefresh(string refreshToken, string token, int idUser)

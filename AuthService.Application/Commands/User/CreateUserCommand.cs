@@ -13,5 +13,5 @@ namespace AuthService.Application.Commands
     string MomLastName,
     DateTime BirthDay,
     string Ci
-    ) : IRequest<UserEntity>;
+    ) : IRequest<int>;
 }

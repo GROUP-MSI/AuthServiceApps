@@ -30,17 +30,16 @@ namespace AuthService.Infrastructure.Repositories
 
     public async Task<UserEntity> GetUserAuthById(int id) =>
       await _context.Users
-        .Where(u => u.Id == id)
-        .FirstOrDefaultAsync();
+        .AsNoTracking()
+        .FirstOrDefaultAsync(u => u.Id == id);
 
 
-    public async Task<UserEntity> CreateUser(UserEntity create, Guid salt)
+    public async Task CreateUser(UserEntity create, Guid salt)
     {
       create.PasswordSalt = salt;
 
       await _context.Users.AddAsync(create);
       await _context.SaveChangesAsync();
-      return create;
     }
 
     public async Task<UserEntity> GetUserByName(string name) =>

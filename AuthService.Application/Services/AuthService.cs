@@ -60,7 +60,8 @@ namespace AuthService.Application.Services
     {
       var command = _mapper.Map<CreateUserCommand>(register);
 
-      var user = await _mediator.Send(command);
+      var userId = await _mediator.Send(command);
+      var user = await _userRepo.GetUserAuthById(userId);
 
       return await Authentication(user);
     }

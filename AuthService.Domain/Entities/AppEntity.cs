@@ -14,6 +14,7 @@ namespace AuthService.Domain.Entities
     public virtual ICollection<AppRouteEntity> AppRoutes { get; set; }
     public virtual ICollection<UserLevelEntity> UserLevels { get; set; }
     public virtual ICollection<AppDetailEntity> AppDetails { get; set; }
+    public virtual ICollection<EmailCredentials> EmailCredentials { get; set; }
 
   }  
 }
