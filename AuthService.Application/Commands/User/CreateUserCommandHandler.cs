@@ -5,11 +5,11 @@ namespace AuthService.Application.Commands
 {
   public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
   {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserRepository _repo;
 
-    public CreateUserCommandHandler(IUserRepository userRepository)
+    public CreateUserCommandHandler(IUserRepository repo)
     {
-      _userRepository = userRepository;
+      _repo = repo;
     }
 
     public Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -19,7 +19,7 @@ namespace AuthService.Application.Commands
 
     // public async Task<Guid> Handle(CreateUserCommand request, CancellationToken ct)
     // {
-    //   await _userRepository.CreateUser(user);
+    //   await _repo.CreateUser(user);
     //   return user.Id;
     // }
   }

@@ -5,6 +5,6 @@ namespace AuthService.Application.Services.Interfaces
 {
   public interface IUserService
   {
-    CreateUserCommand MapToCommand(RegisterUserRequest request);
+    CreateUserCommand MapToCommand(RegisterUserRequestDto request);
   }
 }

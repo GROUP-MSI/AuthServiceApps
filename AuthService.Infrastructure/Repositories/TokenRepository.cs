@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Repositories
 {
-  public class TokenRepository : ITokenRepositoy
+  public class TokenRepository : ITokenRepository
   {
     private readonly DataContext _context;
     public TokenRepository(DataContext context)

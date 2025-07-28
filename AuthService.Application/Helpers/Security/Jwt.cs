@@ -9,8 +9,7 @@ namespace AuthService.Application.Helpers
 {
   public class Jwt
   {
-    public static string GenerateToken(
-      JwtSettings jwt, UserDetailDto user, bool isSeller, bool isCustomer)
+    public static string GenerateToken(JwtSettings jwt, UserDetailDto user)
     {
       var tokenHandler = new JwtSecurityTokenHandler();
 

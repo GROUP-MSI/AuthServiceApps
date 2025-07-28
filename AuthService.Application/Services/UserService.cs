@@ -13,6 +13,6 @@ namespace AuthService.Application.Services
       _mapper = mapper;
     }
 
-    public CreateUserCommand MapToCommand(RegisterUserRequest request) => _mapper.Map<CreateUserCommand>(request);
+    public CreateUserCommand MapToCommand(RegisterUserRequestDto request) => _mapper.Map<CreateUserCommand>(request);
   }
 }

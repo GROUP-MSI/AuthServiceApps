@@ -35,13 +35,13 @@ namespace AuthService.WebApi.Controllers
     // }
 
     [HttpPost("register")]
-    public async Task<IActionResult> AuthRegister([FromBody] RegisterUserRequest request)
+    public async Task<IActionResult> AuthRegister([FromBody] RegisterUserRequestDto request)
     {
       try
       {
         var command = _userServ.MapToCommand(request);
         var userId = await _sender.Send(command);
-        
+
         return CreatedAtAction(
           actionName: nameof(UserController.GetUser),
           controllerName: "user",

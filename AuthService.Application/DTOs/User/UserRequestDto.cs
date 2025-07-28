@@ -1,6 +1,6 @@
 namespace AuthService.Application.DTOs
 {
-  public record RegisterUserRequest(
+  public record RegisterUserRequestDto(
     string Name,
     string Password,
     string Email,

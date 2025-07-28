@@ -18,6 +18,7 @@ namespace AuthService.Application
     public static void LoadServicesApplication(this IServiceCollection services)
     {
       services.AddScoped<IUserService, UserService>();
+      services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
     }
   }
 }

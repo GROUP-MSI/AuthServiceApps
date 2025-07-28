@@ -8,7 +8,7 @@ namespace AuthService.Infrastructure.Configurations
   {
     public static void LoadRepositories(this IServiceCollection services)
     {
-      services.AddScoped<ITokenRepositoy, TokenRepository>();
+      services.AddScoped<ITokenRepository, TokenRepository>();
       services.AddScoped<IBaseRepository, BaseRepository>();
       services.AddScoped<IUserRepository, UserRepository>();
     }

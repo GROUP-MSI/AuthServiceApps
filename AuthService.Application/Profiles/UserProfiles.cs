@@ -8,7 +8,7 @@ namespace AuthService.Application.Profiles
   {
     public UserProfiles()
     {
-      CreateMap<RegisterUserRequest, CreateUserCommand>();
+      CreateMap<RegisterUserRequestDto, CreateUserCommand>();
     }
   }
 }
