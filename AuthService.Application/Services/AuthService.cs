@@ -5,6 +5,7 @@ using AuthService.Application.Services.Interfaces;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Repositories;
 using AutoMapper;
+using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Options;
 
@@ -56,12 +57,19 @@ namespace AuthService.Application.Services
       return await Authentication(user);
     }
 
-    public async Task<AuthResponseDto> RegisterUser(RegisterUserRequestDto register)
+    public async Task<Result<AuthResponseDto>> RegisterUser(RegisterUserRequestDto register)
     {
       var command = _mapper.Map<CreateUserCommand>(register);
 
-      var userId = await _mediator.Send(command);
-      var user = await _userRepo.GetUserAuthById(userId);
+      var result = await _mediator.Send(command);
+
+      if (result.IsFailed)
+        return Result.Fail<AuthResponseDto>(result.Errors);
+
+      var user = await _userRepo.GetUserAuthById(result.Value);
+
+      if (user == null)
+        return Result.Fail<AuthResponseDto>("Usuario no encontrado después de creación");
 
       return await Authentication(user);
     }

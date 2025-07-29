@@ -1,4 +1,5 @@
 using AuthService.Domain.Entities;
+using FluentResults;
 using MediatR;
 
 namespace AuthService.Application.Commands
@@ -7,11 +8,6 @@ namespace AuthService.Application.Commands
     string Name,
     string Password,
     string Email,
-    string DadFirstName,
-    string MomFirstName,
-    string DadLastName,
-    string MomLastName,
-    DateTime BirthDay,
-    string Ci
-    ) : IRequest<int>;
+    int AppId
+    ) : IRequest<Result<int>>;
 }

@@ -1,5 +1,6 @@
 using AuthService.Application.DTOs;
 using AuthService.Application.Services.Interfaces;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.WebApi.Controllers
@@ -35,23 +36,17 @@ namespace AuthService.WebApi.Controllers
     [HttpPost("register")]
     public async Task<IActionResult> AuthRegister([FromBody] RegisterUserRequestDto request)
     {
-      try
-      {
-        var userId = await _service.RegisterUser(request);
+      var result = await _service.RegisterUser(request);
 
+      if (result.IsSuccess)
         return CreatedAtAction(
           actionName: nameof(UserController.GetUser),
           controllerName: "user",
-          routeValues: new { id = userId },
-          value: userId
+          routeValues: new { id = result.Value.User.Id },
+          value: result.Value.User.Id
         );
-      }
-      catch (Exception err)
-      {
-        _logger.LogError(err.Message);
-        Console.WriteLine(err.StackTrace);
-        return BadRequest(err.Message);
-      }
+
+      return BadRequest(new { Error = result.Errors });
     }
 
     // [HttpPost("refresh-token")]

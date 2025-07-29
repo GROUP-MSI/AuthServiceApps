@@ -20,6 +20,7 @@ builder.Services.ConfigureCors(MyAllowSpecificOrigins);
 // Inyeccion de dependencias
 builder.Services.LoadRepositories();
 builder.Services.LoadServicesApplication();
+builder.Services.LoadServices();
 
 // Context
 builder.Services.ConfigureContext(builder.Configuration.GetConnectionString("DbAsaAuth") ?? "");

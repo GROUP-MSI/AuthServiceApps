@@ -1,6 +1,7 @@
 using AuthService.Infrastructure.Database;
 using AuthService.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace AuthService.Infrastructure.Repositories
 {
@@ -37,6 +38,11 @@ namespace AuthService.Infrastructure.Repositories
     }
     public IQueryable<T> GetQueryable<T>() where T : class =>
       _context.Set<T>();
-
+      
+    public async Task<T> FindByConditionAsync<T>(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default) where T : class =>
+       await _context.Set<T>()
+          .Where(expression)
+          .FirstOrDefaultAsync(cancellationToken);
+    
   }
 }

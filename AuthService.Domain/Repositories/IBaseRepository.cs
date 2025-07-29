@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace AuthService.Domain.Repositories
 {
   public interface IBaseRepository
@@ -8,5 +10,6 @@ namespace AuthService.Domain.Repositories
     Task Update<T>(T entity) where T : class;
     Task Remove<T>(T entity) where T : class;
     IQueryable<T> GetQueryable<T>() where T : class;
+    Task<T> FindByConditionAsync<T>(Expression<Func<T, bool>> expression, CancellationToken cancellationToken = default) where T : class;
   }
 }
