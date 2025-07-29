@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using AuthService.Application.DTOs;
 using AuthService.Application.Services.Interfaces;
 using FluentResults;
@@ -50,19 +51,34 @@ namespace AuthService.WebApi.Controllers
       return BadRequest(new { Error = result.Errors });
     }
 
-    // [HttpPost("refresh-token")]
-    // public async Task<IActionResult> RefreshToken()
-    // {
-    //   try
-    //   {
-    //     return Ok("");
-    //   }
-    //   catch (Exception err)
-    //   {
-    //     _logger.LogError(err.Message);
-    //     return BadRequest(err.Message);
-    //   }
-    // }
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken(AuthRefreshTokenRequestDto request)
+    {
+      try
+      {
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var tokenExpired = tokenHandler.ReadJwtToken(request.TokenExpired);
+
+        if (tokenExpired.ValidTo > DateTime.UtcNow)
+          return BadRequest("Token no ha expirado");
+
+
+        int IdUser = Int32.Parse(tokenExpired.Claims.First(x => x.Type == "id").Value);
+
+        if (!await _service.ValidateRefreshToken(request, IdUser))
+          return BadRequest("El token y refresh token son invalidos");
+
+        var authResponse = await _service.RefreshToken(IdUser);
+        
+        return Ok(authResponse);
+      }
+      catch (Exception err)
+      {
+        _logger.LogError(err.Message);
+        return BadRequest(err.Message);
+      }
+    }
 
     // [HttpPost("2fa/email")]
     // public async Task<IActionResult> TwoFactorOfAuthEmail()
