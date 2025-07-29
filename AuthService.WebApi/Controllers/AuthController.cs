@@ -19,19 +19,20 @@ namespace AuthService.WebApi.Controllers
       _service = service;
     }
 
-    // [HttpPost("login")]
-    // public async Task<IActionResult> AuthLogin()
-    // {
-    //   try
-    //   {
-    //     return Ok("");
-    //   }
-    //   catch (Exception err)
-    //   {
-    //     _logger.LogError(err.Message);
-    //     return BadRequest(err.Message);
-    //   }
-    // }
+    [HttpPost("login")]
+    public async Task<IActionResult> AuthLogin(AuthRequestDto request)
+    {
+      try
+      {
+        var result = await _service.Login(request);
+        return Ok(result);
+      }
+      catch (Exception err)
+      {
+        _logger.LogError(err.Message);
+        return BadRequest(err.Message);
+      }
+    }
 
     [HttpPost("register")]
     public async Task<IActionResult> AuthRegister([FromBody] RegisterUserRequestDto request)
@@ -43,7 +44,7 @@ namespace AuthService.WebApi.Controllers
           actionName: nameof(UserController.GetUser),
           controllerName: "user",
           routeValues: new { id = result.Value.User.Id },
-          value: result.Value.User.Id
+          value: result.Value
         );
 
       return BadRequest(new { Error = result.Errors });

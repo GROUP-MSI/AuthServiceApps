@@ -44,6 +44,7 @@ namespace AuthService.Application.Services
       await _repo.CreateToken(_mapper.Map<TokenEntity>(response), user.Id, _jwtConfig.Value.TimeValidMin);
       return response;
     }
+    
     public async Task<AuthResponseDto> Login(AuthRequestDto request)
     {
       var user = await _userRepo.GetUserByAuth(request.NameOrGmail, request.Password);
